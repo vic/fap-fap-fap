@@ -1,4 +1,4 @@
-**fap fap fap**
+*FAP*: Functional Applicative Promise
 ===========
 
 Javascript **fap fap fap** Concatenative **fap fap fap** Combinators **fap fap fap**
