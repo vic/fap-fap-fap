@@ -1,0 +1,26 @@
+{
+  "author": "Victor Hugo Borja <vic.borja@gmail.com> (http://twitter.com/vborja)",
+  "name": "fap-fap-fap",
+  "description": "Javascript *fap fap fap* Concatenative *fap fap fap* Combinators *fap fap fap*",
+  "version": "0.0.0",
+  "homepage": "http://vic.github.com/fap-fap-fap",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vic/fap-fap-fap.git"
+  },
+  "main": "fap.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*",
+    "mecha": "*"
+  },
+  "optionalDependencies": {
+  },
+  "engines": {
+    "node": "*"
+  }
+}
