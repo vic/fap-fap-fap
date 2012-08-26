@@ -1,4 +1,4 @@
 var fap = require('../fap')
 
 ;
-(fap) ("Hello", "World") (fap.fap.puts) (fap.fap.puts)
+(fap) ("Hello", "World") (fap.puts) (fap.puts)

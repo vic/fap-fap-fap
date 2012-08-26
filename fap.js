@@ -4,17 +4,14 @@
 
   , FAP = function(){
     Object.defineProperty(arguments, 'this', {value: this})
-    var _ = arguments
-    return F(_) && A(_) || P(_, function(){
-      return FAP.apply(_, arguments)
-    })
+    return F(arguments) && A(arguments) || P(arguments)
   }
 
   , F = function(a) { return typeof a[0] === 'function' }
 
   , A = function(a) { return apply.apply(a.this, [a]) }
 
-  , P = function(a, f) { return extendFunction(a, f) }
+  , P = function(a) { return extendFunction(a) }
 
   , isArguments = function(a) { return '[object Arguments]' === String(a) }
 
@@ -33,9 +30,12 @@
     return FAP.apply(this.this, this)
   }
 
-  , extendFunction = function(a, f) {
+  , extendFunction = function(a) {
+    var f = function(){
+      return FAP.apply(a, arguments)
+    }
     if(!a.fap) Object.defineProperty(a, 'fap', {value: fap})
-    if(!f.fap) Object.defineProperty(f, 'fap', {value: a.fap})
+    for(var i in a.fap) if(a.fap.hasOwnProperty(i)) f[i] = a.fap[i]
     return f
   }
 
