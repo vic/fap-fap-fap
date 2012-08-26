@@ -1,33 +1,53 @@
 ;(function(){
 
-  var Fap = function(fap) {
-    if(fap === Fap && arguments.length == 1){
-      return stack
-    }
+  var undefined
+
+  , FAP = function(){
+    Object.defineProperty(arguments, 'this', {value: this})
+    var _ = arguments
+    return F(_) && A(_) || P(_, function(){
+      return FAP.apply(_, arguments)
+    })
   }
 
-  var stack = function(self){
-    var args = Array.prototype.slice.apply(arguments, [1])
-    var stk = function(){
-      var argv = Array.prototype.slice.apply(arguments, [])
-      if( isSimpleFunctionApplication(argv) ){
-        return apply(self, argv[0], args)
-      }
-      return stack.apply(null, [self].concat(args).concat(argv))
-    }
-    return stk
+  , F = function(a) { return typeof a[0] === 'function' }
+
+  , A = function(a) { return apply.apply(a.this, [a]) }
+
+  , P = function(a, f) { return extendFunction(a, f) }
+
+  , isArguments = function(a) { return '[object Arguments]' === String(a) }
+
+  , ary = function(a) { return Array.prototype.slice.apply(a, []) }
+
+  , flat = function(a, depth) {
+    return (isArguments(a.this) ? flat(a.this) : []).concat(ary(a))
   }
 
-  var isSimpleFunctionApplication = function(a) {
-    return a.length == 1 && Fap !== a[0] && typeof a[0] === 'function'
+  , inspect = function(self, argv){
+    console.log(flat(self).concat(ary(argv)))
   }
 
-  var apply = function(self, func, args){
-    return stack( func.apply(self, args) )
+  , apply = function(a) {
+    console.log(this[0])
+    return FAP.apply(this.this, this)
   }
 
+  , extendFunction = function(a, f) {
+    if(!a.fap) Object.defineProperty(a, 'fap', {value: fap})
+    if(!f.fap) Object.defineProperty(f, 'fap', {value: a.fap})
+    return f
+  }
 
-  module.exports = Fap
+  , puts = function(){
+  }
+
+  , fap = {
+    puts: puts
+  }
+
+  return module.exports = new FAP
+
 })
 (typeof module !== 'undefined' ? module : new function(global, name){
   Object.defineProperty(this, 'exports', {

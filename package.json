@@ -19,6 +19,8 @@
     "mecha": "*"
   },
   "optionalDependencies": {
+    "jquery": "*",
+    "q": "*"
   },
   "engines": {
     "node": "*"
